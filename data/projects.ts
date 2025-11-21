@@ -1,8 +1,8 @@
 export const projects = [
   {
     title: "DecentralWatch",
-    description: "⛏️ DePIN uptime monitor with real-time mining rig monitoring and blockchain infrastructure tracking for decentralized networks.",
-    badges: ["PoW Mining", "DePIN", "Solana", "Electron"],
+    description: "DePIN uptime monitor with Electron + Web UI for decentralized infrastructure monitoring.",
+    badges: ["Solana", "DePIN", "Electron", "React"],
     grant: "Solana x CoinDCX",
     links: {
       github: "https://github.com/pratikkale26/decentralwatch",
@@ -11,20 +11,9 @@ export const projects = [
     image: "./DecentralWatch_logo.png",
   },
   {
-    title: "Mining Dashboard",
-    description: "🔧 Real-time mining rig monitoring with hash rate tracking, temperature monitoring, and profitability calculations for multiple algorithms.",
-    badges: ["Mining", "Proof of Work", "React", "WebSockets"],
-    grant: "Mining Grant",
-    links: {
-      github: "https://github.com/pratikkale26/mining-dashboard",
-      live: "https://mining.kalehub.com",
-    },
-    image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  },
-  {
     title: "CrowdLens",
-    description: "🗳️ Solana-powered community voting with on-chain reputation tracking and decentralized governance for PoW communities.",
-    badges: ["Solana", "DePIN", "Anchor", "Web3"],
+    description: "Solana-powered community voting for creator feedback with on-chain reputation tracking.",
+    badges: ["Solana", "Anchor", "Next.js", "TypeScript"],
     grant: null,
     links: {
       github: "https://github.com/pratikkale26/crowdlens",
@@ -33,37 +22,37 @@ export const projects = [
     image: "./CrowdLens_logo.png",
   },
   {
-    title: "Block Explorer",
-    description: "🔗 Custom blockchain explorer with real-time transaction tracking, mempool monitoring, and mining statistics visualization.",
-    badges: ["Bitcoin", "Ethereum", "PoW", "Node.js"],
-    grant: "Bitcoin Dev Fund",
-    links: {
-      github: "https://github.com/pratikkale26/block-explorer",
-      live: "https://explorer.kalehub.com",
-    },
-    image: "https://images.pexels.com/photos/844124/pexels-photo-844124.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  },
-  {
-    title: "Mining Pool",
-    description: "⚡ Decentralized mining pool with fair reward distribution, low fees, and support for multiple PoW algorithms.",
-    badges: ["Mining Pool", "PoW", "PPLNS", "Stratum"],
-    grant: null,
-    links: {
-      github: "https://github.com/pratikkale26/mining-pool",
-      live: "https://pool.kalehub.com",
-    },
-    image: "https://images.prismic.io/swissborg-website/0507e7bd-7590-4a6c-a6e3-162c1f6cd7e1_ETH_STAKING_LAUNCH_BLOG_1600x800.jpg?auto=compress%2Cformat&fit=max&q=80",
-  },
-  {
     title: "CanvasChat",
-    description: "🎨 Real-time collaborative canvas with chat, featuring Web3 authentication and NFT-based room ownership.",
-    badges: ["WebSockets", "NFTs", "React", "IPFS"],
+    description: "Real-time collaborative canvas with chat, similar to Excalidraw but with enhanced real-time features.",
+    badges: ["WebSockets", "Canvas API", "React", "Node.js"],
     grant: null,
     links: {
       github: "https://github.com/pratikkale26/canvaschat",
       live: null,
     },
     image: "https://images.pexels.com/photos/196645/pexels-photo-196645.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  },
+  {
+    title: "Claude Wallet",
+    description: "Custodial wallet concept with username-password UX for simplified Web3 onboarding.",
+    badges: ["Solana", "Web3Auth", "Next.js", "Tailwind"],
+    grant: null,
+    links: {
+      github: "https://github.com/Pratikkale26/Solify",
+      live: null,
+    },
+    image: "https://images.pexels.com/photos/844124/pexels-photo-844124.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  },
+  {
+    title: "ETH Staking",
+    description: "ETH Staking platform with real-time updates and analytics.",
+    badges: ["Ethereum", "Next.js", "Tailwind"],
+    grant: null,
+    links: {
+      github: "https://github.com/Pratikkale26/staking_contract",
+      live: null,
+    },
+    image: "https://images.prismic.io/swissborg-website/0507e7bd-7590-4a6c-a6e3-162c1f6cd7e1_ETH_STAKING_LAUNCH_BLOG_1600x800.jpg?auto=compress%2Cformat&fit=max&q=80",
   },
   
   // {

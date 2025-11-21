@@ -33,15 +33,14 @@ export default function HeroSection() {
   }, [])
   
   const skills = [
-    "🔨 Proof of Work",
-    "⛏️ Mining",
-    "DePIN",
-    "Solana", 
     "Web3",
+    "DePIN",
+    "Solana",
     "Full-Stack",
-    "Blockchain",
+    "SaaS",
     "React",
     "Node.js",
+    "TypeScript",
   ]
 
   const socialLinks = [
@@ -65,7 +64,7 @@ export default function HeroSection() {
   return (
     <div 
       ref={containerRef}
-      className="relative min-h-screen flex flex-col justify-center px-4 sm:px-6 overflow-hidden blockchain-bg"
+      className="relative min-h-screen flex flex-col justify-center px-4 sm:px-6 overflow-hidden"
       style={{
         "--mouse-x": "0.5",
         "--mouse-y": "0.5",
@@ -84,28 +83,28 @@ export default function HeroSection() {
       >
         <Badge 
           variant="outline"
-          className="mb-4 px-4 py-1.5 border-primary/30 bg-primary/5 text-primary font-mono text-sm hover:bg-primary/10 transition-all duration-300 animate-pulse"
+          className="mb-4 px-4 py-1.5 border-primary/30 bg-primary/5 text-primary font-mono text-sm hover:bg-primary/10 transition-colors"
         >
-          ⛏️ PoW Miner & DePIN Builder
+          Superteam IN Member
         </Badge>
         
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
           Hi, I&apos;m{" "}
-          <span className="gradient-text font-bold cyberpunk-text">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-chart-2 hover:from-chart-2 hover:to-primary transition-all duration-300">
             Pratik Kale
           </span>
         </h1>
         
         <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-muted-foreground mb-6 flex flex-col md:flex-row md:items-center gap-2 justify-center md:justify-start">
-          <span>I mine</span>
+          <span>I build</span>
           <span className="text-primary h-8 md:h-10">
             <TypewriterComponent
               options={{
                 strings: [
-                  "blockchain networks",
-                  "DePIN solutions", 
                   "Web3 applications",
-                  "decentralized futures",
+                  "DePIN solutions",
+                  "Solana projects",
+                  "fullstack experiences",
                 ],
                 autoStart: true,
                 loop: true,
@@ -117,7 +116,7 @@ export default function HeroSection() {
         </h2>
         
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto md:mx-0 mb-6 leading-relaxed">
-          🔨 Proof of Work enthusiast and Web3 architect building decentralized infrastructure. From mining rigs to smart contracts, I craft the future of blockchain technology.
+          Web3, full-stack developer, and Solana-funded builder passionate about creating innovative solutions that push the boundaries of technology.
         </p>
         
         <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-8">

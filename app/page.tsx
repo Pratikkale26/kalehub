@@ -1,6 +1,8 @@
 import HeroSection from "@/components/hero-section"
 import {NowSection} from "@/components/now-section"
 import AboutSection from "@/components/about-section"
+import ExperienceSection from "@/components/experience-section"
+import EducationSection from "@/components/education-section"
 import ProjectsSection from "@/components/projects-section"
 import TechStackSection from "@/components/tech-stack-section"
 import IdeaBoardSection from "@/components/idea-board-section"
@@ -13,6 +15,8 @@ export default function Home() {
       <HeroSection />
       <NowSection />
       <AboutSection />
+      <ExperienceSection />
+      <EducationSection />
       <ProjectsSection />
       <TechStackSection />
       <IdeaBoardSection />

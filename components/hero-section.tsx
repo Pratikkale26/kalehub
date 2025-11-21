@@ -81,12 +81,20 @@ export default function HeroSection() {
         transition={{ duration: 0.8 }}
         className="container relative z-10 max-w-4xl mx-auto text-center md:text-left pt-20"
       >
-        <Badge 
-          variant="outline"
-          className="mb-4 px-4 py-1.5 border-primary/30 bg-primary/5 text-primary font-mono text-sm hover:bg-primary/10 transition-colors"
-        >
-          Superteam IN Member
-        </Badge>
+        <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-4">
+          <Badge 
+            variant="outline"
+            className="mb-2 px-4 py-1.5 border-primary/30 bg-primary/5 text-primary font-mono text-sm hover:bg-primary/10 transition-colors"
+          >
+            Superteam IN Member
+          </Badge>
+          <Badge 
+            variant="outline"
+            className="mb-2 px-4 py-1.5 border-chart-3/30 bg-chart-3/5 text-chart-3 font-mono text-sm hover:bg-chart-3/10 transition-colors"
+          >
+            Solana Turbin3 Graduate
+          </Badge>
+        </div>
         
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
           Hi, I&apos;m{" "}
@@ -96,23 +104,7 @@ export default function HeroSection() {
         </h1>
         
         <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-muted-foreground mb-6 flex flex-col md:flex-row md:items-center gap-2 justify-center md:justify-start">
-          <span>I build</span>
-          <span className="text-primary h-8 md:h-10">
-            <TypewriterComponent
-              options={{
-                strings: [
-                  "Web3 applications",
-                  "DePIN solutions",
-                  "Solana projects",
-                  "fullstack experiences",
-                ],
-                autoStart: true,
-                loop: true,
-                deleteSpeed: 50,
-                delay: 50,
-              }}
-            />
-          </span>
+          <span>Full-Stack & Web3 Engineer</span>
         </h2>
         
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto md:mx-0 mb-6 leading-relaxed">

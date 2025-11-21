@@ -1,7 +1,18 @@
 export const projects = [
   {
+    title: "SoApp",
+    description: "Social collaboration platform incubated at IIT-Madras. Real-time collaborative canvas with chat features, enabling seamless teamwork and creative expression.",
+    badges: ["Next.js", "WebSockets", "Canvas API", "IIT-M Incubated"],
+    grant: null,
+    links: {
+      github: "https://github.com/pratikkale26/soapp",
+      live: "https://soapp.tech",
+    },
+    image: "./SoApp_logo.png",
+  },
+  {
     title: "DecentralWatch",
-    description: "DePIN uptime monitor with Electron + Web UI for decentralized infrastructure monitoring.",
+    description: "DePIN uptime monitoring solution with Electron desktop app and web dashboard. Monitors 50+ Solana validators with real-time alerts and analytics.",
     badges: ["Solana", "DePIN", "Electron", "React"],
     grant: "Solana x CoinDCX",
     links: {
@@ -9,6 +20,17 @@ export const projects = [
       live: "https://watch.kalehub.com",
     },
     image: "./DecentralWatch_logo.png",
+  },
+  {
+    title: "Flowrge",
+    description: "Automation platform for workflow optimization and business process automation. Reduced manual processing time by 60% for enterprise clients.",
+    badges: ["React", "Node.js", "MongoDB", "D3.js"],
+    grant: null,
+    links: {
+      github: "https://github.com/pratikkale26/flowrge",
+      live: null,
+    },
+    image: "./Flowrge_logo.png",
   },
   {
     title: "CrowdLens",

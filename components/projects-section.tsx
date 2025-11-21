@@ -20,10 +20,10 @@ export default function ProjectsSection() {
         <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
             <h2 className="text-3xl font-bold mb-4">
-              <span className="font-mono text-orange-500">#</span> PoW & Mining Projects
+              <span className="font-mono text-primary">#</span> Featured Projects
             </h2>
             <p className="text-muted-foreground max-w-2xl">
-              ⛏️ A selection of my Proof of Work and Web3 projects, showcasing mining infrastructure, blockchain tools, and decentralized applications. Each project represents my contribution to the PoW ecosystem.
+              A selection of my recent projects, focused on Web3, DePIN, and innovative technologies. Each project represents a step in my journey as a builder.
             </p>
           </div>
           <Link href="/projects">

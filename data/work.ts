@@ -1,4 +1,4 @@
-export type LinkKind = "live" | "source" | "package" | "site"
+export type LinkKind = "live" | "source" | "package" | "site" | "contract"
 
 export type ProofLink = {
   label: string
@@ -76,15 +76,26 @@ export const selectedWork: Work[] = [
     slug: "monsocket",
     name: "MonSocket",
     domain: "Realtime SDKs",
-    tagline: "The same realtime primitive, ported to Monad",
+    tagline: "Socket.io for Monad — every action is a real transaction",
     description:
-      "The same primitive on Monad, where every action is an on-chain transaction. Porting it showed how little of a realtime SDK is genuinely chain-specific.",
+      "Realtime multiplayer rooms with no game server and no join fee. Presence and messages are event logs — the cheapest bytes on an EVM — while shared room state lives in one storage slot, so a late joiner reads it instead of replaying history.",
     status: "active",
     period: "Aug 2026 — present",
-    stack: ["TypeScript", "Monad", "WebSockets", "Node.js"],
-    notes: ["Published to npm, open sourced under MIT"],
+    stack: ["TypeScript", "Monad", "Solidity", "EIP-1559", "WebSockets"],
+    notes: [
+      "The Vault: a two-player co-op escape room. 3 levels, 9 puzzles impossible alone — every move, chat line, and key turn is a Monad transaction",
+      "Spectating is free and wallet-less, because reading the chain costs nothing",
+      "Fixed, tight gas limits: Monad charges gas_limit, not gas_used, so padding is real money",
+      "Reads sweep the Proposed block — speculative state one block ahead of finality",
+      "146-check BFS reachability prover over every puzzle graph, plus a two-client suite against live testnet",
+    ],
     links: [
       { label: "Demo", href: "https://escapemonsocket.vercel.app", kind: "live" },
+      {
+        label: "Contract",
+        href: "https://testnet.monadvision.com/address/0xf8a5324af88f305ea8db0b60d09c5de1219e4ab4",
+        kind: "contract",
+      },
       { label: "npm", href: "https://www.npmjs.com/package/monsocket", kind: "package" },
       { label: "Source", href: "https://github.com/Pratikkale26/monsocket", kind: "source" },
     ],

@@ -1,138 +1,113 @@
-"use client"
-
-import { useState } from "react"
-import { motion } from "framer-motion"
+import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowLeftIcon, ExternalLinkIcon, GithubIcon } from "lucide-react"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { ArrowLeft, ArrowUpRight } from "lucide-react"
+import { selectedWork, otherWork, type Work } from "@/data/work"
+import { StatusPill } from "@/components/section"
 
-// Import projects from a shared file
-import { projects } from "@/data/projects"
+export const metadata: Metadata = {
+  title: "Projects — Pratik Kale",
+  description:
+    "The full archive: compilers, realtime SDKs, observability tooling, and applications across Solana, Avalanche, Monad, and Sui.",
+  alternates: { canonical: "https://kalehub.com/projects" },
+}
 
-export default function ProjectsPage() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-  const [searchQuery, setSearchQuery] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("all")
+const DOMAIN_ORDER = ["Compilers", "Realtime SDKs", "Observability", "Applications"] as const
 
-  // Get unique categories from badges
-  const categories = Array.from(new Set(projects.flatMap(project => project.badges)))
+const DOMAIN_BLURB: Record<string, string> = {
+  Compilers: "Making on-chain code cheaper to run, without making it harder to write.",
+  "Realtime SDKs": "The same realtime primitive — rooms, presence, shared state — across execution environments.",
+  Observability: "Catching the failures that report themselves as successes.",
+  Applications: "Products built end to end, mostly earlier work.",
+}
 
-  // Filter projects based on search and category
-  const filteredProjects = projects.filter(project => {
-    const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         project.description.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesCategory = selectedCategory === "all" || project.badges.includes(selectedCategory)
-    return matchesSearch && matchesCategory
-  })
-
+function Row({ item }: { item: Work }) {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container max-w-6xl py-20">
-        <div className="mb-12">
-          <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-primary mb-8">
-            <ArrowLeftIcon className="mr-2 h-4 w-4" />
-            Back to Home
-          </Link>
-          
-          <h1 className="text-4xl font-bold mb-4">
-            <span className="font-mono text-primary">#</span> All Projects
-          </h1>
-          <p className="text-muted-foreground max-w-2xl mb-8">
-            Explore my complete portfolio of projects, from Web3 applications to innovative tools and platforms.
-          </p>
+    <article className="grid gap-3 border-t border-border py-6 md:grid-cols-[9.5rem_1fr] md:gap-8">
+      <div className="flex min-w-0 flex-row flex-wrap items-center gap-x-4 gap-y-1 md:flex-col md:items-start md:gap-2">
+        <span className="label-mono">{item.period}</span>
+        <StatusPill status={item.status} note={item.statusNote} />
+      </div>
 
-          <div className="flex flex-col md:flex-row gap-4 mb-8">
-            <Input
-              placeholder="Search projects..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="max-w-sm"
-            />
-            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Filter by category" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
-                {categories.map((category) => (
-                  <SelectItem key={category} value={category}>
-                    {category}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+      <div className="min-w-0">
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <h3 className="font-medium tracking-tight">{item.name}</h3>
+          <span className="text-sm text-[hsl(var(--brand))]">{item.tagline}</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {filteredProjects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          {item.description}
+        </p>
+
+        {item.notes && (
+          <ul className="mt-3 space-y-1.5">
+            {item.notes.map((n) => (
+              <li key={n} className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground">
+                <span aria-hidden="true" className="mt-2 h-px w-3 shrink-0 bg-border" />
+                <span>{n}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+          {item.links.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-1 font-mono text-xs text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-[hsl(var(--brand))]"
             >
-              <Card className="h-full overflow-hidden border-border/50 bg-card/70 backdrop-blur transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(0,0,0,0.1)]">
-                <div className="aspect-video w-full overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className={cn(
-                      "h-full w-full object-cover transition-transform duration-500",
-                      hoveredIndex === index && "scale-110"
-                    )}
-                  />
-                </div>
-                
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <CardTitle className="text-xl font-bold">{project.title}</CardTitle>
-                    {project.grant && (
-                      <Badge variant="outline" className="bg-primary/10 text-primary border-primary/30">
-                        {project.grant}
-                      </Badge>
-                    )}
-                  </div>
-                </CardHeader>
-                
-                <CardContent>
-                  <p className="text-muted-foreground mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.badges.map((badge) => (
-                      <Badge key={badge} variant="secondary">{badge}</Badge>
-                    ))}
-                  </div>
-                </CardContent>
-                
-                <CardFooter className="flex gap-3">
-                  <Link href={project.links.github} target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="sm" className="gap-1">
-                      <GithubIcon className="h-4 w-4" />
-                      <span>Repo</span>
-                    </Button>
-                  </Link>
-                  
-                  {project.links.live && (
-                    <Link href={project.links.live} target="_blank" rel="noopener noreferrer">
-                      <Button variant="ghost" size="sm" className="gap-1">
-                        <ExternalLinkIcon className="h-4 w-4" />
-                        <span>Live</span>
-                      </Button>
-                    </Link>
-                  )}
-                </CardFooter>
-              </Card>
-            </motion.div>
+              {l.label}
+              <ArrowUpRight
+                className="h-3 w-3 text-muted-foreground transition-transform group-hover:-translate-y-px group-hover:translate-x-px"
+                aria-hidden="true"
+              />
+            </Link>
           ))}
         </div>
+
+        <p className="mt-3 font-mono text-[11px] text-muted-foreground">{item.stack.join(" · ")}</p>
+      </div>
+    </article>
+  )
+}
+
+export default function ProjectsPage() {
+  const all = [...selectedWork, ...otherWork]
+
+  return (
+    <div className="mx-auto max-w-5xl px-5 pb-24 pt-28 sm:px-8 md:pt-36">
+      <Link
+        href="/"
+        className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+      >
+        <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5" aria-hidden="true" />
+        Back
+      </Link>
+
+      <h1 className="mt-8 text-3xl font-semibold tracking-tight md:text-4xl">Projects</h1>
+      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
+        {all.length} projects across Solana, Avalanche, Monad, and Sui, grouped by what they are for.
+        Each links to source, a package, or a running deployment.
+      </p>
+
+      <div className="mt-14 space-y-16">
+        {DOMAIN_ORDER.map((domain) => {
+          const items = all.filter((w) => w.domain === domain)
+          if (items.length === 0) return null
+
+          return (
+            <section key={domain}>
+              <h2 className="text-lg font-semibold tracking-tight">{domain}</h2>
+              <p className="mb-4 mt-1 text-sm text-muted-foreground">{DOMAIN_BLURB[domain]}</p>
+              {items.map((item) => (
+                <Row key={item.slug} item={item} />
+              ))}
+            </section>
+          )
+        })}
       </div>
     </div>
   )
-} 
+}

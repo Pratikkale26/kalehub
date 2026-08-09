@@ -1,6 +1,9 @@
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { selectedWork, otherWork, type Work } from "@/data/work"
+
+/** How many of otherWork the homepage shows. The rest are on /projects. */
+const ALSO_BUILT_ON_HOMEPAGE = 4
 import { Reveal, Section, StatusPill } from "@/components/section"
 
 function ProofLinks({ item }: { item: Work }) {
@@ -117,11 +120,17 @@ export default function WorkSection() {
 
       <Reveal>
         <h3 className="mb-1 mt-16 text-base font-semibold tracking-tight">Also built</h3>
-        <p className="mb-2 text-sm text-muted-foreground">Shipped, but not the headline.</p>
+        <p className="mb-2 text-sm text-muted-foreground">
+          Shipped, but not the headline. {otherWork.length - ALSO_BUILT_ON_HOMEPAGE} more on{" "}
+          <Link href="/projects" className="text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-[hsl(var(--brand))]">
+            the projects page
+          </Link>
+          .
+        </p>
       </Reveal>
 
       <div>
-        {otherWork.map((item) => (
+        {otherWork.slice(0, ALSO_BUILT_ON_HOMEPAGE).map((item) => (
           <Reveal key={item.slug}>
             <CompactRow item={item} />
           </Reveal>

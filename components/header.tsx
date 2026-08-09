@@ -2,150 +2,108 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
-import { GithubIcon, LinkedinIcon, TwitterIcon, Menu, X } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
 
 const navItems = [
-  { href: "/", label: "Home" },
-  { href: "#projects", label: "Projects" },
-  { href: "#tech-stack", label: "Tech Stack" },
-  { href: "#build-logs", label: "Build Logs" },
+  { href: "#work", label: "Work" },
+  { href: "#proof", label: "Proof" },
+  { href: "#open-source", label: "Open source" },
+  { href: "#experience", label: "Experience" },
+  { href: "#about", label: "About" },
   { href: "#contact", label: "Contact" },
 ]
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = React.useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
-  const pathname = usePathname()
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
   React.useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    const onScroll = () => setIsScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  // Close the mobile sheet on Escape.
+  React.useEffect(() => {
+    if (!isMenuOpen) return
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setIsMenuOpen(false)
+    document.addEventListener("keydown", onKey)
+    return () => document.removeEventListener("keydown", onKey)
+  }, [isMenuOpen])
+
   return (
-    <header 
+    <header
       className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300",
-        isScrolled 
-          ? "bg-background/80 backdrop-blur-lg border-b border-border py-3" 
-          : "bg-transparent py-5"
+        "fixed inset-x-0 top-0 z-50 transition-colors duration-200",
+        isScrolled ? "border-b border-border bg-background/85 backdrop-blur-md" : "bg-transparent"
       )}
     >
-      <div className="container flex items-center justify-between">
-        <Link 
-          href="/" 
-          className="text-foreground font-semibold text-lg hover:text-primary transition-colors"
-        >
-          <span className="font-mono text-primary">~</span>/kalehub
+      <nav
+        aria-label="Main"
+        className="mx-auto flex h-14 max-w-5xl items-center justify-between px-5 sm:px-8"
+      >
+        <Link href="#top" className="font-mono text-sm font-medium tracking-tight">
+          pratik kale
+          <span className="text-[hsl(var(--brand))]">.</span>
         </Link>
-        
-        <nav className="hidden md:flex items-center space-x-1">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "px-3 py-2 text-sm font-medium rounded-md transition-colors",
-                pathname === item.href
-                  ? "text-primary bg-primary/10"
-                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        
-        <div className="flex items-center space-x-2">
-          <div className="hidden sm:flex items-center space-x-2">
-            <a href="https://github.com/pratikkale26" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-                <GithubIcon className="h-4 w-4" />
-              </Button>
-            </a>
-            <a href="https://twitter.com/pratikkale26" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-              <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-                <TwitterIcon className="h-4 w-4" />
-              </Button>
-            </a>
-            <a href="https://linkedin.com/in/pratikkale26" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-                <LinkedinIcon className="h-4 w-4" />
-              </Button>
-            </a>
-          </div>
-          <ModeToggle />
-          
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </Button>
-        </div>
-      </div>
 
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden border-t border-border bg-background/95 backdrop-blur-lg"
-          >
-            <nav className="container py-4 space-y-2">
-              {navItems.map((item) => (
+        <div className="flex items-center gap-1">
+          <ul className="hidden items-center gap-6 md:flex">
+            {navItems.map((item) => (
+              <li key={item.href}>
                 <Link
-                  key={item.href}
                   href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={cn(
-                    "block px-3 py-2 text-sm font-medium rounded-md transition-colors",
-                    pathname === item.href
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                  )}
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {item.label}
                 </Link>
-              ))}
-              <div className="flex items-center space-x-2 pt-2 border-t border-border">
-                <a href="https://github.com/pratikkale26" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                  <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-                    <GithubIcon className="h-4 w-4" />
-                  </Button>
-                </a>
-                <a href="https://twitter.com/pratikkale26" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                  <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-                    <TwitterIcon className="h-4 w-4" />
-                  </Button>
-                </a>
-                <a href="https://linkedin.com/in/pratikkale26" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                  <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-                    <LinkedinIcon className="h-4 w-4" />
-                  </Button>
-                </a>
-              </div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              </li>
+            ))}
+          </ul>
+
+          <div className="ml-2 hidden md:block">
+            <ModeToggle />
+          </div>
+
+          <div className="flex items-center md:hidden">
+            <ModeToggle />
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen((v) => !v)}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-nav"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {isMenuOpen && (
+        <div
+          id="mobile-nav"
+          className="border-t border-border bg-background md:hidden"
+        >
+          <ul className="mx-auto max-w-5xl px-5 py-2 sm:px-8">
+            {navItems.map((item) => (
+              <li key={item.href} className="border-b border-border last:border-b-0">
+                <Link
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block py-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </header>
   )
 }

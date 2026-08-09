@@ -1,23 +1,21 @@
 import HeroSection from "@/components/hero-section"
-import {NowSection} from "@/components/now-section"
+import WorkSection from "@/components/work-section"
+import ProofSection from "@/components/proof-section"
+import OpenSourceSection from "@/components/open-source-section"
+import ExperienceSection from "@/components/experience-section"
 import AboutSection from "@/components/about-section"
-import ProjectsSection from "@/components/projects-section"
-import TechStackSection from "@/components/tech-stack-section"
-import IdeaBoardSection from "@/components/idea-board-section"
-import BuildLogsSection from "@/components/build-logs-section"
-import CTASection from "@/components/cta-section"
+import ContactSection from "@/components/contact-section"
 
 export default function Home() {
   return (
-    <>
+    <div id="top">
       <HeroSection />
-      <NowSection />
+      <WorkSection />
+      <ProofSection />
+      <OpenSourceSection />
+      <ExperienceSection />
       <AboutSection />
-      <ProjectsSection />
-      <TechStackSection />
-      <IdeaBoardSection />
-      <BuildLogsSection />
-      <CTASection />
-    </>
-  );
+      <ContactSection />
+    </div>
+  )
 }

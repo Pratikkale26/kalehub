@@ -1,52 +1,54 @@
 import './globals.css';
-import type { Metadata } from 'next';
-import { Inter, Fira_Code } from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
+import localFont from 'next/font/local';
 import { ThemeProvider } from '@/components/theme-provider';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 
-const inter = Inter({ 
-  subsets: ['latin'],
+// Self-hosted rather than next/font/google: no third-party request on page load,
+// no build-time dependency on fonts.gstatic.com being reachable.
+const inter = localFont({
+  src: './fonts/InterVariable.woff2',
+  weight: '100 900',
   variable: '--font-inter',
+  display: 'swap',
 });
 
-const firaCode = Fira_Code({
-  subsets: ['latin'],
-  variable: '--font-fira',
+const mono = localFont({
+  src: './fonts/JetBrainsMonoVariable.woff2',
+  weight: '100 800',
+  variable: '--font-mono',
+  display: 'swap',
 });
+
+const title = 'Pratik Kale — Blockchain Infrastructure & Systems Engineer';
+const description =
+  'I build the infrastructure developers build on: compilers, realtime SDKs, and observability tooling across Solana, Avalanche, and Monad. Creator of Anvil, SolSocket, and ICM Trace.';
 
 export const metadata: Metadata = {
-  title: 'Pratik Kale | Web3 Founder & Full-Stack Developer',
-  description: 'Web3 founder, full-stack developer, and Solana-funded builder with expertise in DePIN, SaaS, and blockchain technologies. Building innovative solutions in the Web3 space.',
-  icons: {
-    icon: '/favicon.ico',
-  },
+  metadataBase: new URL('https://kalehub.com'),
+  title,
+  description,
+  icons: { icon: '/favicon.ico' },
   keywords: [
     'Pratik Kale',
-    'Pratik',
-    'Kale',
-    'PratikKale',
-    'Pratik Kale Surat',
-    'Pratik Kale Gujarat',
-    'Pratik Kale India',
-    'Web3',
-    'DePIN',
-    'Solana',
-    'Full-Stack Developer',
-    'Founder',
-    'Blockchain',
-    'React',
+    'blockchain infrastructure engineer',
+    'Solana engineer',
+    'systems engineer',
+    'developer tooling',
+    'Anvil',
+    'Anchor transpiler',
+    'Pinocchio',
+    'SolSocket',
+    'MonSocket',
+    'ICM Trace',
+    'Avalanche Teleporter',
+    'Monad',
+    'Rust',
     'TypeScript',
-    'Node.js',
-    'Web Development',
-    'Blockchain Developer',
-    'Web3 Developer',
-    'Solana Developer',
-    'Full Stack Developer Surat',
-    'Web3 Developer Surat',
-    'Blockchain Developer Surat'
+    'DePIN',
   ],
-  authors: [{ name: 'Pratik Kale' }],
+  authors: [{ name: 'Pratik Kale', url: 'https://kalehub.com' }],
   creator: 'Pratik Kale',
   publisher: 'Pratik Kale',
   robots: {
@@ -55,70 +57,71 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
+      'max-video-preview': -1,
     },
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://kalehub.com',
-    title: 'Pratik Kale | Web3 Founder & Full-Stack Developer',
-    description: 'Web3 founder, full-stack developer, and Solana-funded builder with expertise in DePIN, SaaS, and blockchain technologies. Building innovative solutions in the Web3 space.',
-    siteName: 'KaleHub',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Pratik Kale - Web3 Developer',
-      },
-    ],
+    siteName: 'Pratik Kale',
+    title,
+    description,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pratik Kale | Web3 Founder & Full-Stack Developer',
-    description: 'Web3 founder, full-stack developer, and Solana-funded builder with expertise in DePIN, SaaS, and blockchain technologies.',
-    creator: '@kalehub',
-    images: ['/twitter-image.jpg'],
+    title,
+    description,
+    creator: '@PratikKale26',
   },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-  },
-  verification: {
-    google: 'your-google-site-verification',
-    yandex: 'your-yandex-verification',
-    yahoo: 'your-yahoo-verification',
-  },
-  alternates: {
-    canonical: 'https://kalehub.com',
-  },
+  alternates: { canonical: 'https://kalehub.com' },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+// Next 15 wants viewport as its own export, not a metadata key.
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#fcfcfb' },
+    { media: '(prefers-color-scheme: dark)', color: '#100f0e' },
+  ],
+};
+
+/** Helps search engines connect the site to the person and their profiles. */
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Pratik Kale',
+  url: 'https://kalehub.com',
+  jobTitle: 'Blockchain Infrastructure & Systems Engineer',
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'Indian Institute of Technology Madras' },
+  sameAs: [
+    'https://github.com/Pratikkale26',
+    'https://x.com/PratikKale26',
+    'https://www.linkedin.com/in/pratikkale26/',
+  ],
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      <body
+        className={`${inter.variable} ${mono.variable} font-sans bg-background text-foreground min-h-screen`}
+      >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
-      </head>
-      <body className={`${inter.variable} ${firaCode.variable} font-sans bg-background text-foreground min-h-screen`}>
-        <ThemeProvider 
-          attribute="class" 
-          defaultTheme="dark" 
-          enableSystem={true}
-          storageKey="theme"
-        >
-          <div className="flex flex-col min-h-screen">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem storageKey="theme">
+          <a
+            href="#work"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-background focus:px-4 focus:py-2 focus:ring-2 focus:ring-ring"
+          >
+            Skip to content
+          </a>
+          <div className="flex min-h-screen flex-col">
             <Header />
             <main className="flex-grow">{children}</main>
             <Footer />

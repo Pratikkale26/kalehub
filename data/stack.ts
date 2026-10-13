@@ -9,7 +9,7 @@ export const stack = [
   },
   {
     group: "Systems & backend",
-    items: ["TypeScript", "Node.js", "Express", "WebSockets", "Kafka", "Redis", "PostgreSQL", "Prisma"],
+    items: ["Rust", "Tokio", "Actix-web", "TypeScript", "Node.js", "Express", "WebSockets", "Kafka", "Redis Streams", "PostgreSQL", "Prisma"],
   },
   {
     group: "Infrastructure",

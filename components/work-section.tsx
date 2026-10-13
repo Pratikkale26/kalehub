@@ -108,7 +108,7 @@ export default function WorkSection() {
       id="work"
       index="01"
       title="Selected work"
-      intro="Three threads: compilers, realtime SDKs, and observability. Every claim below links to something you can go and check."
+      intro="Four threads: compilers, distributed systems, realtime SDKs, and observability. Every claim below links to something you can go and check."
     >
       <div>
         {selectedWork.map((item, i) => (

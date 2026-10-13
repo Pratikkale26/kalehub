@@ -11,10 +11,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://kalehub.com/projects" },
 }
 
-const DOMAIN_ORDER = ["Compilers", "Realtime SDKs", "Observability", "Applications"] as const
+const DOMAIN_ORDER = ["Compilers", "Systems", "Realtime SDKs", "Observability", "Applications"] as const
 
 const DOMAIN_BLURB: Record<string, string> = {
   Compilers: "Making on-chain code cheaper to run, without making it harder to write.",
+  Systems: "High-performance matching engines, write-ahead logs, and memory-first architectures in Rust.",
   "Realtime SDKs": "The same realtime primitive — rooms, presence, shared state — across execution environments.",
   Observability: "Catching the failures that report themselves as successes.",
   Applications: "Products built end to end, mostly earlier work.",

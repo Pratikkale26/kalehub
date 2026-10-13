@@ -19,7 +19,7 @@ export type Work = {
   /** What it is, in one line, for someone who has never heard of it. */
   tagline: string
   /** The theme it belongs to — used as the left rail of the evidence table. */
-  domain: "Compilers" | "Realtime SDKs" | "Observability" | "Applications"
+  domain: "Compilers" | "Systems" | "Realtime SDKs" | "Observability" | "Applications"
   description: string
   status: WorkStatus
   statusNote?: string
@@ -54,6 +54,28 @@ export const selectedWork: Work[] = [
       { label: "Demo", href: "https://anvil-rho.vercel.app/", kind: "live" },
       { label: "npm", href: "https://www.npmjs.com/package/anvil-sol", kind: "package" },
       { label: "Source", href: "https://github.com/Pratikkale26/Anvil", kind: "source" },
+    ],
+  },
+  {
+    slug: "cex-rs",
+    name: "cex-rs",
+    domain: "Systems",
+    tagline: "High-performance crypto exchange matching engine & gateway in Rust",
+    description:
+      "A high-performance, event-sourced cryptocurrency exchange matching core and real-time API gateway in Rust. Built with an LMAX-style memory-first architecture, an append-only Redis Stream Write-Ahead Log (WAL), fast-forward replay recovery, and a mathematically closed double-entry financial ledger.",
+    status: "active",
+    period: "Oct 2026 — present",
+    stack: ["Rust", "Tokio", "Actix-web", "Redis Streams", "PostgreSQL", "LMAX Architecture", "Docker"],
+    notes: [
+      "LMAX-style deterministic single-writer event loop with price-time-priority BTreeMap orderbook",
+      "Append-only Redis Stream Write-Ahead Log (WAL) with snapshot + fast-forward replay recovery",
+      "Double-entry financial ledger with balance locking and asynchronous cold-path PostgreSQL persistence worker",
+      "Actix-web API gateway featuring Argon2id password hashing, JWT authentication, and token-bucket rate limiting",
+      "Demuxed oneshot reply queues for low-latency asynchronous request-response correlation",
+    ],
+    links: [
+      { label: "Source", href: "https://github.com/Pratikkale26/cex-rs", kind: "source" },
+      { label: "Architecture", href: "https://github.com/Pratikkale26/cex-rs/blob/main/ARCHITECTURE.md", kind: "site" },
     ],
   },
   {
